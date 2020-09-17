@@ -8,12 +8,18 @@ let initalTodos = [
     {id: 4, todo: "hw", complete: false, category: "School"}
 ]
 
+console.log(initalTodos)
+
+let todoList = document.createElement("ul")
+todoList.id = "myUL"
+
+document.body.appendChild(todoList)
 
 //view all todos
 initalTodos.map(item => {
   let todo = document.createElement("li")
   todo.innerHTML = item.todo 
-  document.body.appendChild(todo)
+  todoList.appendChild(todo)
 })
 
 //filter todos by category
@@ -93,7 +99,7 @@ document.body.appendChild(add)
 var myList = document.getElementsByTagName('li')
 var i
 for (i = 0; i < myList.length; i++) {
-    var span = document.createElement("span")
+    var span = document.createElement("div")
     var txt = document.createTextNode("x")
     span.className = "close"
     span.appendChild(txt)
@@ -109,23 +115,40 @@ for (i = 0; i < close.length; i++) {
   }
 }
 
-//add button
-let addButton = document.createElement("button")
-addButton.className = "add-button"
-addButton.innerHTML = "Add"
-add.appendChild(addButton)
+function newTodo() {
+  let li = document.createElement("li")
+  let inputValue = document.getElementById("newTodo").value 
+  let t = document.createTextNode(inputValue)
 
-addButton.addEventListener('click', () => {
-  initalTodos.push(Object.values(input.value))
-})
+  console.log(t)
 
+  li.appendChild(t)
 
-//get input to create new todo
-let input = document.createElement("input")
-input.type = "text"
-input.placeholder = "Laundry"
-input.className = "userInput"
-add.appendChild(input);
+  if (inputValue === '') {
+    alert("Please write a new todo.")
+  }
+  else {
+    todoList.appendChild(li)
+    // initalTodos.push(inputValue)
+
+  }
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+
+  document.getElementById("newTodo").value = " "
+
+}
 
 
 
