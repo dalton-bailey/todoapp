@@ -70,12 +70,19 @@ li {
   flex-direction: column;
 }
 
-.input {
+.inputDiv {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-#newTodo {
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#newTodo, #newCategory {
   height: 24px;
 }
 

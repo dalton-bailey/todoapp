@@ -11,15 +11,27 @@
     <title>Todos</title>
   </head>
   <body>
+    <h1>Todos!</h1>
+    <div id="todos"></div>
+
     <div>
-      <h1>Todos!</h1>
-      <div id="todos"></div>
       <div id="form">
-        <h1>New Todo</h1>
-        <div class="input">
-          <input type="text" id="newTodo" placeholder="Title..." />
-          <button onclick="newTodo()" class="addBtn">+</button>
+        <div class="inputDiv">
+          <h1>New Todo</h1>
+          <div class="input">
+            <input type="text" id="newTodo" placeholder="Title..." />
+            <button onclick="newTodo()" class="addBtn">+</button>
+          </div>
         </div>
+        <form id="form">
+          <div class="inputDiv">
+            <h1>Add Category</h1>
+            <div class="input">
+              <input type="text" id="newCategory" placeholder="Title..." />
+              <button onclick="newCategory()" class="addBtn">+</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
