@@ -8,7 +8,7 @@ let initalTodos = [
   { id: 4, todo: "hw", complete: false, category: "School" },
 ];
 
-console.log(initalTodos);
+console.log(initalTodos)
 
 let todos = document.getElementById("todos")
 
@@ -19,15 +19,15 @@ let allTitle = document.createElement("h1")
 allTitle.innerHTML = "All Todos"
 allTodos.appendChild(allTitle)
 
-let todoList = document.createElement("ul");
+let todoList = document.createElement("ul")
 
 allTodos.appendChild(todoList);
 
 //view all todos
 initalTodos.map((item) => {
-  let todo = document.createElement("li");
+  let todo = document.createElement("li")
   todo.innerHTML = item.todo;
-  todoList.appendChild(todo);
+  todoList.appendChild(todo)
 });
 
 //filter todos by category
@@ -35,91 +35,104 @@ const groceryItems = initalTodos.filter((item) => item.category === "Grocery");
 const houseItems = initalTodos.filter((item) => item.category === "House");
 const schoolItems = initalTodos.filter((item) => item.category === "School");
 
-console.log(groceryItems);
-console.log(schoolItems);
-console.log(houseItems);
+console.log(groceryItems)
+console.log(schoolItems)
+console.log(houseItems)
 
 //view todos by category
 
 //groceries div
-let groceries = document.createElement("div");
+let groceries = document.createElement("div")
 
 //groceries title
-let groceryTitle = document.createElement("h1");
-groceryTitle.innerHTML = "Grocery Todos";
-groceries.appendChild(groceryTitle);
+let groceryTitle = document.createElement("h1")
+groceryTitle.innerHTML = "Grocery Todos"
+groceries.appendChild(groceryTitle)
 
-let groceriesList = document.createElement("ul");
-groceries.appendChild(groceriesList);
+let groceriesList = document.createElement("ul")
+groceries.appendChild(groceriesList)
 
 //grocery list
 let groceriesListItem = groceryItems.forEach((item) => {
-  let todo = document.createElement("li");
-  todo.innerHTML = item.todo;
+  let todo = document.createElement("li")
+  todo.innerHTML = item.todo
 
-  groceriesList.appendChild(todo);
+  groceriesList.appendChild(todo)
 });
 
 //display grocery list
-todos.appendChild(groceries);
+todos.appendChild(groceries)
 
 //house div
-let house = document.createElement("div");
+let house = document.createElement("div")
 
 //house title
-let houseTitle = document.createElement("h1");
-houseTitle.innerHTML = "House Todos";
-house.appendChild(houseTitle);
+let houseTitle = document.createElement("h1")
+houseTitle.innerHTML = "House Todos"
+house.appendChild(houseTitle)
 
 //house list
 let houseList = houseItems.forEach((item) => {
-  let todo = document.createElement("li");
-  todo.innerHTML = item.todo;
+  let todo = document.createElement("li")
+  todo.innerHTML = item.todo
 
-  house.appendChild(todo);
-});
+  house.appendChild(todo)
+})
 
 //display house list
-todos.appendChild(house);
+todos.appendChild(house)
 
 //school div
-let school = document.createElement("div");
+let school = document.createElement("div")
 
 //school title
-let schoolTitle = document.createElement("h1");
-schoolTitle.innerHTML = "School Todos";
-school.appendChild(schoolTitle);
+let schoolTitle = document.createElement("h1")
+schoolTitle.innerHTML = "School Todos"
+school.appendChild(schoolTitle)
 
 //school list
 let schoolList = schoolItems.forEach((item) => {
-  let todo = document.createElement("li");
-  todo.innerHTML = item.todo;
+  let todo = document.createElement("li")
+  todo.innerHTML = item.todo
 
-  school.appendChild(todo);
+  school.appendChild(todo)
 });
 
 //display school list
-todos.appendChild(school);
+todos.appendChild(school)
 
 // //create div for add input and button
 // let add = document.createElement("div")
 // document.body.appendChild(add)
 
+//hide checked todos
+let hideFunction = () => {
+  var checkBox = document.getElementsByClassName("check")
+    if (checkBox.checked == true) {
+      myCheck.style.display = "none"
+    }
+    else {
+      myCheck.style.display = "block"
+    }
+  }
+  
 //check box
-var myCheck = document.getElementsByTagName("li");
-var i;
+let myCheck = document.getElementsByTagName("li");
+let i;
 for (i = 0; i < myCheck.length; i++) {
-  var check = document.createElement("input");
-  check.setAttribute("type", "checkbox");
+  var check = document.createElement("input")
+  check.setAttribute("type", "checkbox")
   // var txt = document.createTextNode("o")
-  check.className = "check";
+  check.className = "check"
   // check.appendChild(txt)
-  myCheck[i].appendChild(check);
+  myCheck[i].appendChild(check)
 }
 
-//delete list items
-var myList = document.getElementsByTagName("li");
-var s;
+
+
+//create delete button
+let myList = document.getElementsByTagName("li");
+let s;
 for (s = 0; s < myList.length; s++) {
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("x");
@@ -128,10 +141,11 @@ for (s = 0; s < myList.length; s++) {
   myList[s].appendChild(span);
 }
 
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
+//delete list items
+let close = document.getElementsByClassName("close");
+let t;
+for (t = 0; t < close.length; t++) {
+  close[t].onclick = function () {
     var div = this.parentElement;
     div.style.display = "none";
   };
@@ -145,45 +159,55 @@ for (i = 0; i < close.length; i++) {
 
 //new todo
 function newTodo() {
-  let li = document.createElement("li");
-  li.className = "newItem";
-  let inputValue = document.getElementById("newTodo").value;
-  let t = document.createTextNode(inputValue);
+  let li = document.createElement("li")
+  li.className = "newItem"
+  let inputValue = document.getElementById("newTodo").value
+  let t = document.createTextNode(inputValue)
 
-  console.log(t);
+  console.log(t)
 
-  li.appendChild(t);
+  li.appendChild(t)
 
-  if (inputValue === "") {
-    alert("Please write a new todo.");
-  } else {
-    todoList.appendChild(li);
-  }
+  todoList.appendChild(li)
 
-  var newCheck = document.getElementsByClassName("newItem");
+  var newCheck = document.getElementsByClassName("newItem")
 
   var i;
   for (i = 0; i < newCheck.length; i++) {
-    var check = document.createElement("input");
-    check.setAttribute("type", "checkbox");
+    var check = document.createElement("input")
+    check.setAttribute("type", "checkbox")
     // var txt = document.createTextNode("o")
-    check.className = "check";
+    check.className = "check"
     // check.appendChild(txt)
-    newCheck[i].appendChild(check);
+    newCheck[i].appendChild(check)
   }
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("x");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
+  var span = document.createElement("SPAN")
+  var txt = document.createTextNode("x")
+  span.className = "close"
+  span.appendChild(txt)
+  li.appendChild(span)
 
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function () {
-      var div = this.parentElement;
-      div.style.display = "none";
+      var div = this.parentElement
+      div.style.display = "none"
     };
   }
 
-  document.getElementById("newTodo").value = " ";
+  document.getElementById("newTodo").value = " "
+}
+
+//new category
+function newCategory() {
+  let catDiv = document.createElement("div")
+  let catHeader = document.createElement("h1")
+  catDiv.appendChild(catHeader)
+  catHeader.innerHTML = document.getElementById("newCategory").value
+
+  todos.appendChild(catDiv)
+
+
+  document.getElementById("newCategory").value = ""
+
 }
