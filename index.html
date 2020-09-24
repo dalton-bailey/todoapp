@@ -12,27 +12,31 @@
   </head>
   <body>
     <h1>Todos!</h1>
-    <div id="todos"></div>
-
-      <div id="form">
-        <div class="inputDiv">
-          <h1>New Todo</h1>
-          <div class="input">
-            <input type="text" id="newTodo" placeholder="Title..." />
-            <button onclick="newTodo()" class="addBtn">+</button>
-          </div>
-        </div>
-        <div id="form">
-          <div class="inputDiv">
-            <h1>Add Category</h1>
-            <div class="input">
-              <input type="text" id="newCategory" placeholder="Title..." />
-              <button onclick="newCategory()" class="addBtn">+</button>
-            </div>
-          </div>
+    <div id="todos">
+      <div class="allTodos">
+        <h1 id = "all">All Todos</h1>
+        <ul class="initialTodos"></ul>
+      </div>
+    </div>
+    <div id="form">
+      <div class="inputDiv">
+        <h1>New Todo</h1>
+        <div class="input">
+          <label>Name</label>
+          <input type="text" id="newTodo"/>
         </div>
       </div>
+      <form id="form">
+        <div class="inputDiv">
+          <div class="input">
+            <label>Category</label><br>
+            <input type="text" id="newCategory" title = "Category" />
+            <button type="submit" id="addTodo" class="addBtn">+</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-    <script src="/src/main.js"></script>
+    <script src="/src/new.js"></script>
   </body>
 </html>

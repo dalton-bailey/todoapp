@@ -2,33 +2,34 @@
 //This is the kind of data you would traditionally get from a data base.
 //For now we are just going to mock it.
 let initalTodos = [
-  { id: 1, todo: "buy milk", complete: false, category: "Grocery" },
-  { id: 2, todo: "laundry", complete: false, category: "House" },
-  { id: 3, todo: "eggs", complete: false, category: "Grocery" },
-  { id: 4, todo: "hw", complete: false, category: "School" },
+  { id: 1, todo: "Buy milk.", complete: false, category: "Grocery" },
+  { id: 2, todo: "Clean the cat box.", complete: false, category: "House" },
+  { id: 3, todo: "Chips and salsa.", complete: true, category: "Grocery" },
+  { id: 4, todo: "Finish Homework for DGM 3760", complete: false, category: "School" },
 ];
 
 console.log(initalTodos)
 
-let todos = document.getElementById("todos")
+function displayTodos(item) {
+  const initalList = document.querySelector(".initialTodos")
+  const todo = document.createElement("li")
 
-let allTodos = document.createElement("div")
-todos.appendChild(allTodos);
+  todo.innerHTML = 
+  `<div>
+  <input class="check" type="checkbox">
+  <label>${item.todo}</label>
+  <button class="close">X</button>
+  </div>
+  `
 
-let allTitle = document.createElement("h1")
-allTitle.innerHTML = "All Todos"
-allTodos.appendChild(allTitle)
+  initalList.appendChild(todo)
+}
 
-let todoList = document.createElement("ul")
 
-allTodos.appendChild(todoList);
+// allTodos.appendChild(todoList);
 
 //view all todos
-initalTodos.map((item) => {
-  let todo = document.createElement("li")
-  todo.innerHTML = item.todo;
-  todoList.appendChild(todo)
-});
+initalTodos.forEach((item) => displayTodos(item))
 
 //filter todos by category
 const groceryItems = initalTodos.filter((item) => item.category === "Grocery");
@@ -100,114 +101,80 @@ let schoolList = schoolItems.forEach((item) => {
 
 //display school list
 todos.appendChild(school)
-
-// //create div for add input and button
-// let add = document.createElement("div")
-// document.body.appendChild(add)
-
-//hide checked todos
-let hideFunction = () => {
-  var checkBox = document.getElementsByClassName("check")
-    if (checkBox.checked == true) {
-      myCheck.style.display = "none"
-    }
-    else {
-      myCheck.style.display = "block"
-    }
-  }
   
 //check box
-let myCheck = document.getElementsByTagName("li");
-let i;
-for (i = 0; i < myCheck.length; i++) {
-  var check = document.createElement("input")
-  check.setAttribute("type", "checkbox")
-  // var txt = document.createTextNode("o")
-  check.className = "check"
-  // check.appendChild(txt)
-  myCheck[i].appendChild(check)
-}
+// let myCheck = document.getElementsByTagName("li");
+// let i;
+// for (i = 0; i < myCheck.length; i++) {
+//   var check = document.createElement("input")
+//   check.setAttribute("type", "checkbox")
+//   // var txt = document.createTextNode("o")
+//   check.className = "check"
+//   // check.appendChild(txt)
+//   myCheck[i].appendChild(check)
+// }
 
-
-
-//create delete button
-let myList = document.getElementsByTagName("li");
-let s;
-for (s = 0; s < myList.length; s++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("x");
-  span.className = "close";
-  span.appendChild(txt);
-  myList[s].appendChild(span);
-}
 
 //delete list items
-let close = document.getElementsByClassName("close");
-let t;
-for (t = 0; t < close.length; t++) {
-  close[t].onclick = function () {
-    var div = this.parentElement;
-    div.style.display = "none";
-  };
-}
+// let close = document.getElementsByClassName("close");
+// let t;
+// for (t = 0; t < close.length; t++) {
+//   close[t].onclick = function () {
+//     var div = this.parentElement;
+//     div.style.display = "none";
+//   };
+// }
 
-// todoList.addEventListener('click', function(check) {
-//   if (check.target.className === 'check') {
-//     check.target.classList.toggle('checked')
-//   }
-// })
 
-//new todo
-function newTodo() {
-  let li = document.createElement("li")
-  li.className = "newItem"
-  let inputValue = document.getElementById("newTodo").value
-  let t = document.createTextNode(inputValue)
-
-  console.log(t)
-
-  li.appendChild(t)
-
-  todoList.appendChild(li)
-
-  var newCheck = document.getElementsByClassName("newItem")
-
-  var i;
-  for (i = 0; i < newCheck.length; i++) {
-    var check = document.createElement("input")
-    check.setAttribute("type", "checkbox")
-    // var txt = document.createTextNode("o")
-    check.className = "check"
-    // check.appendChild(txt)
-    newCheck[i].appendChild(check)
+// //check box complete
+todoList.addEventListener('click', function(check) {
+  if (check.target.className === 'check') {
+    console.log('done')
   }
+})
 
-  var span = document.createElement("SPAN")
-  var txt = document.createTextNode("x")
-  span.className = "close"
-  span.appendChild(txt)
-  li.appendChild(span)
+//get input value for new todo
+const form = document.querySelector('#addTodo')
+const check = document.querySelector('.check')
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      var div = this.parentElement
-      div.style.display = "none"
-    };
+check.addEventListener('click', event => {
+
+})
+
+form.addEventListener('click', event => {
+  event.preventDefault()
+
+  let inputValue = document.getElementById("newTodo")
+  let t = inputValue.value.trim();
+
+  newTodo(t)
+
+  inputValue.value = " "
+  inputValue.focus();
+  
+})
+
+//push new todo to inital array and call displayTodos to display 
+function newTodo(todoContent) {
+  const todoText = {
+    id: initalTodos.length + 1,
+    todo: todoContent,
+    complete: false,
+    category: 'General'
   }
+   
+  initalTodos.push(todoText)
 
-  document.getElementById("newTodo").value = " "
+  displayTodos(todoText)
 }
 
-//new category
-function newCategory() {
-  let catDiv = document.createElement("div")
-  let catHeader = document.createElement("h1")
-  catDiv.appendChild(catHeader)
-  catHeader.innerHTML = document.getElementById("newCategory").value
+// //new category {
+//   form.addEventListener('click', event => {
+//     event.preventDefault()
 
-  todos.appendChild(catDiv)
+//     let categoryValue = document.getElementById("newCategory").value
+//     let s = document.createTextNode(categoryValue)
 
-
-  document.getElementById("newCategory").value = ""
-
-}
+//     categoryValue.value = " "
+//     // categoryValue.focus();
+//   }) 

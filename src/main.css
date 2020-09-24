@@ -1,69 +1,61 @@
 body {
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
 }
 
 #todos {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 h1 {
-    color: #040BDB;
-    text-align: center;
+  color: #040bdb;
+  text-align: center;
 }
 
-.close {
-    /* position: absolute; */
-    color: black;
-    align-self: flex-end;
-    font-size: 20px;
-    padding: 10px;
-    width: 20px;
-    text-align: center;
-    /* margin-left: 268px; */
-  }
 
-  .close:hover {
-    background-color: #040BDB;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 20px;
-    text-align: center;
-  }
+.close:hover {
+  background-color: #040bdb;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
 
-  .check {
-    /* position: absolute; */
-    align-self: flex-end;
-    margin: 8px;
-    height: 25px;
-    width: 25px;
-    /* border-radius: 20x; */
-  }
+.check {
+  margin: 8px;
+  height: 25px;
+  width: 25px;
+  border-radius: 20x;
+}
 
-  input[type=checkbox] {
-    border-radius: 20px;
-  }
+input[type="checkbox"] {
+  border-radius: 20px;
+}
 
-  .check:hover {
-    background-color: grey
-  }
-
+.check:hover {
+  background-color: grey;
+}
 
 ul {
   padding: 0px;
 }
 
 li {
-    height: 120px;
-    width: 120px;
-    display: flex;
-    justify-content: space-between;
-    margin: 15px;
-    border: 1px solid black;
-    padding: 20px;
-    border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  margin: 15px;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 20px;
 }
+
+#todo div {
+  display: flex;
+  align-items: center;
+}
+
 
 #form {
   display: flex;
@@ -82,16 +74,18 @@ li {
   justify-content: center;
 }
 
-#newTodo, #newCategory {
+#newTodo,
+#newCategory {
   height: 24px;
 }
 
 .addBtn {
   border: none;
   border-radius: 5px;
-  background-color: #040BDB;
+  background-color: #040bdb;
   color: white;
   width: 30px;
   height: 30px;
   font-size: 29px;
 }
+
