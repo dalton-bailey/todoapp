@@ -4,7 +4,7 @@
 let initalTodos = [
   { id: 1, todo: "Buy milk.", complete: false, category: "Grocery" },
   { id: 2, todo: "Clean the cat box.", complete: false, category: "House" },
-  { id: 3, todo: "Chips and salsa.", complete: true, category: "Grocery" },
+  { id: 3, todo: "Chips and salsa.", complete: false, category: "Grocery" },
   {
     id: 4,
     todo: "Finish Homework for DGM 3760",
@@ -29,7 +29,6 @@ function newTodo(todoContent, todoCategory) {
   initTodos(initalTodos);
 }
 
-
 //delete list items
 function deleteTodo() {
   const close = document.getElementsByClassName("close");
@@ -38,7 +37,6 @@ function deleteTodo() {
       const id = event.target.dataset.id;
       const index = initalTodos.findIndex((item) => item.id == id);
       initalTodos.splice(index, 1);
-
       initTodos(initalTodos);
     });
   }
@@ -48,23 +46,32 @@ function deleteTodo() {
 function completeTodo() {
   const check = document.getElementsByClassName("check");
   for (let t = 0; t < check.length; t++) {
-    check[t].addEventListener("change", (event) => {
+    check[t].addEventListener("click", (event) => {
       const id = event.target.dataset.id;
       const index = initalTodos.findIndex((item) => item.id == id);
-      initalTodos[index].complete = !initalTodos[index].complete
-      check[t].checked = initalTodos[index].complete;
-      console.log(initalTodos)
-      initTodos(initalTodos);
+      initalTodos[index].complete = !initalTodos[index].complete;
+      console.log(initalTodos);
     });
   }
 }
 
+//clear done todos
+const clear = document.querySelector("#clearDone");
+clear.addEventListener("click", (event) => {
+  initalTodos
+    .filter((todo) => todo.complete === true)
+    // .forEach((todo) => todo.deleteTodo(todo));
+
+  console.log(initalTodos.filter((todo) => todo.complete === true).length);
+});
+
 function initTodos(array) {
   const initalList = document.querySelector(".initialTodos");
-  initalList.innerHTML = '';
+  initalList.innerHTML = "";
   array.forEach((item) => addTodo(item));
   deleteTodo();
   completeTodo();
+  myStorage();
 }
 
 function addTodo(item) {
@@ -79,6 +86,14 @@ function addTodo(item) {
 
   initalList.appendChild(todo);
 }
+
+//local storage 
+function myStorage() {
+  window.localStorage.setItem('todo', JSON.stringify(initalTodos));
+  initalTodos = JSON.parse(window.localStorage.getItem('todo'));
+}
+
+
 
 function main() {
   //display todos

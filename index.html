@@ -17,24 +17,23 @@
         <h1 id = "all">All Todos</h1>
         <ul class="initialTodos"></ul>
       </div>
+      <div>
+        <button id="clearDone">Clear Done Todos</button>
+      </div>
     </div>
     <div id="form">
-      <div class="inputDiv">
         <h1>New Todo</h1>
-        <div class="input">
+        <form class="input">
           <label>Name</label>
           <input type="text" id="newTodo"/>
-        </div>
-      </div>
-      <form id="form">
-        <div class="inputDiv">
-          <div class="input">
-            <label>Category</label><br>
-            <input type="text" id="newCategory" title = "Category" />
-            <button type="submit" id="addTodo" class="addBtn">+</button>
+        </form>
+        <form id="form">
+            <div class="input">
+              <label>Category</label><br>
+              <input type="text" id="newCategory" title = "Category" />
+              <button type="submit" id="addTodo" class="addBtn">+</button>
           </div>
-        </div>
-      </form>
+        </form>
     </div>
 
     <script src="/src/new.js"></script>
