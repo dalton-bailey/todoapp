@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: "Kumbh Sans", sans-serif;
 }
 
@@ -77,7 +77,6 @@ li {
   border-radius: 5px;
   background-color: #040bdb;
   color: white;
-  /* width: 30px; */
   height: 30px;
   font-size: 30px;
 }
@@ -85,4 +84,16 @@ li {
 .addBtn:hover {
   cursor: pointer;
 }
+ */
 
+ .groceryTodos {
+   display: none;
+ }
+
+ .completedTodos {
+   display: none;
+ }
+
+ .schoolTodos {
+   display: none;
+ }

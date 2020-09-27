@@ -12,30 +12,39 @@
   </head>
   <body>
     <h1>Todos!</h1>
+    <div id="form">
+      <h1>New Todo</h1>
+      <form class="input">
+        <label>Name</label>
+        <input type="text" id="newTodo" />
+      </form>
+      <form id="form">
+        <div class="input">
+          <label>Category</label><br />
+          <input type="text" id="newCategory" title="Category" />
+          <button type="submit" id="addTodo" class="addBtn">+</button>
+        </div>
+      </form>
+    </div>
     <div id="todos">
       <div class="allTodos">
-        <h1 id = "all">All Todos</h1>
-        <ul class="initialTodos"></ul>
+        <button type="button" id="allTodosBtn">All Todos</button>
+        <button type="button" id="groceryBtn">Grocery</button>
+        <button type="button" id="schoolBtn">School</button>
+        <button type="button" id="houseBtn">House</button>
+        <ul class="initialTodos" id="initialTodos"></ul>
+        <ul class="groceryTodos" id="groceryTodos"></ul>
+        <ul class="schoolTodos" id="schoolTodos"></ul>
+        <ul class="houseTodos" id="houseTodos"></ul>
       </div>
       <div>
-        <button id="clearDone">Clear Done Todos</button>
+        <button type="button" id="clearDoneBtn">Completed Todos</button>
+        <ul class="completedTodos" id="completedTodos"></ul>
       </div>
     </div>
-    <div id="form">
-        <h1>New Todo</h1>
-        <form class="input">
-          <label>Name</label>
-          <input type="text" id="newTodo"/>
-        </form>
-        <form id="form">
-            <div class="input">
-              <label>Category</label><br>
-              <input type="text" id="newCategory" title = "Category" />
-              <button type="submit" id="addTodo" class="addBtn">+</button>
-          </div>
-        </form>
-    </div>
+
 
     <script src="/src/new.js"></script>
+    <script src="src/completed.js"></script>
   </body>
 </html>
