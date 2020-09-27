@@ -1,5 +1,65 @@
-/* body {
+body {
   font-family: "Kumbh Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+}
+
+.innerDiv {
+  width: 100%;
+}
+
+.newTodo {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  text-align: center;
+  font-size: 30px;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 10px 0px;
+}
+
+#form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 550px;
+}
+
+input {
+  height: 25px;
+}
+
+.addBtn {
+  border: none;
+  background-color: #8cffbf;
+  width: 35px;
+  height: 35px;
+  font-size: 28px;
+  border-radius: 20px;
+  border: 2px solid #8cffbf;
+}
+
+.addBtn:hover {
+  border: 2px solid black;
+}
+
+.content {
+  background-color: #80a8ff;
+  border-radius: 30px;
+  margin-top: 20px;
+}
+
+.contentOne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #todos {
@@ -8,15 +68,20 @@
   align-items: center;
 }
 
-.allTodos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.todos {
+  padding: 0px;
 }
 
-h1 {
-  color: #040bdb;
+.categoryHeader,
+.completedheader {
   text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+.name {
+  display: flex;
+  align-items: center;
 }
 
 .close {
@@ -27,73 +92,69 @@ h1 {
 }
 
 .close:hover {
-  background-color: #040bdb;
-  color: white;
-  cursor: pointer;
+  background-color: #e874e8;
   border-radius: 20px;
   border: none;
 }
 
-.check:hover {
+button:hover {
   cursor: pointer;
 }
-
-.initialTodos {
-  padding: 0px;
-  width: 100%;
-}
-
 
 li {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   margin: 15px;
-  border: 1px solid black;
   padding: 20px;
-  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  border-radius: 15px;
+  width: 600px;
 }
 
-#todo div {
+.categories {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
-
-
-.input {
+.categoryButtons {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-#newTodo,
-#newCategory {
-  height: 24px;
-}
-
-.addBtn {
+.squareBtn {
   border: none;
-  border-radius: 5px;
-  background-color: #040bdb;
+  background-color: #80a8ff;
   color: white;
-  height: 30px;
-  font-size: 30px;
+  padding: 15px;
+  margin: 10px 0px;
+  font-size: 18px;
+  border-radius: 30px;
 }
 
-.addBtn:hover {
-  cursor: pointer;
+.squareBtn:hover {
+  color: black;
 }
- */
 
- .groceryTodos {
-   display: none;
- }
+.squareBtn:active {
+  color: black;
+}
 
- .completedTodos {
-   display: none;
- }
+.groceryTodos {
+  display: none;
+}
 
- .schoolTodos {
-   display: none;
- }
+.completedTodos {
+  display: none;
+}
+
+.schoolTodos {
+  display: none;
+}
+
+.houseTodos {
+  display: none;
+}

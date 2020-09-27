@@ -16,7 +16,7 @@ let initalTodos = [
 //filter by category
 const groceryItems = initalTodos.filter((item) => item.category === "Grocery");
 const schoolItems = initalTodos.filter((item) => item.category === "School");
-const houseItems = initalTodos.filter((item) => item.category === "House")
+const houseItems = initalTodos.filter((item) => item.category === "House");
 
 //push new todo to inital array and call displayTodos to display
 function newTodo(todoContent, todoCategory) {
@@ -59,6 +59,7 @@ function completeTodo() {
     });
   }
 }
+
 
 function initTodos() {
   if (window.localStorage.getItem("todo")) {
@@ -108,6 +109,7 @@ function main() {
   initTodos();
   initGroceryList();
   initSchoolList();
+  initHouseList();
 
   //event listener for new todo
   const form = document.querySelector("#form");
@@ -147,19 +149,11 @@ function addGroceryTodo(item) {
 
   const todo = document.createElement("li");
   todo.className = "li";
-  const check = document.createElement("input");
-  check.type = "checkbox";
-  check.dataset.id = item.id;
-  check.className = "check";
-  check.id = "check";
-  check.checked = item.complete;
 
   todo.innerHTML = `
     <label>${item.category} - ${item.todo}</label>
-    <button data-id="${item.id}" class="close">X</button>
     `;
 
-  todo.prepend(check);
   groceriesUl.appendChild(todo);
 }
 
@@ -174,31 +168,19 @@ function initGroceryList() {
   const groceryList = document.querySelector(".groceryTodos");
   groceryList.innerHTML = "";
   groceryItems.forEach((item) => addGroceryTodo(item));
-  deleteTodo();
-  completeTodo();
 }
 
 //school todos
 
 //create school todos
 function addSchoolTodo(item) {
-  let schoolUl = document.querySelector(".schoolTodos");
-
+  const schoolUl = document.querySelector(".schoolTodos");
   const todo = document.createElement("li");
-  todo.className = "li";
-  const check = document.createElement("input");
-  check.type = "checkbox";
-  check.dataset.id = item.id;
-  check.className = "check";
-  check.id = "check";
-  check.checked = item.complete;
 
   todo.innerHTML = `
     <label>${item.category} - ${item.todo}</label>
-    <button data-id="${item.id}" class="close">X</button>
     `;
 
-  todo.prepend(check);
   schoolUl.appendChild(todo);
 }
 
@@ -213,9 +195,37 @@ function initSchoolList() {
   const schoolList = document.querySelector(".schoolTodos");
   schoolList.innerHTML = "";
   schoolItems.forEach((item) => addSchoolTodo(item));
-  deleteTodo();
-  completeTodo();
 }
+
+//house todos
+
+//create house todos
+function addHouseTodo(item) {
+  let houseUl = document.querySelector(".houseTodos");
+
+  const todo = document.createElement("li");
+
+  todo.innerHTML = `
+    <label>${item.category} - ${item.todo}</label>
+    `;
+
+  houseUl.appendChild(todo);
+}
+
+//initializes house todos
+function initHouseList() {
+  if (window.localStorage.getItem("todo")) {
+    getFromStorage();
+  } else {
+    saveToStorage();
+  }
+
+  const houseList = document.querySelector(".houseTodos");
+  houseList.innerHTML = "";
+  houseItems.forEach((item) => addHouseTodo(item));
+}
+
+const header = document.querySelector(".categoryHeader")
 
 //toggle all todos
 const allTodos = document.querySelector("#allTodosBtn");
@@ -223,15 +233,17 @@ allTodos.addEventListener("click", (event) => {
   let allTodos = document.getElementById("initialTodos");
   let grocery = document.getElementById("groceryTodos");
   let school = document.getElementById("schoolTodos");
+  let house = document.getElementById("houseTodos");
+
+  header.innerHTML = "All Todos"
 
   if (allTodos.style.display === "block") {
     allTodos.style.display = "none";
-    
-
   } else {
     allTodos.style.display = "block";
     grocery.style.display = "none";
     school.style.display = "none";
+    house.style.display = "none";
   }
 });
 
@@ -241,14 +253,17 @@ grocery.addEventListener("click", (event) => {
   let grocery = document.getElementById("groceryTodos");
   let school = document.getElementById("schoolTodos");
   let allTodos = document.getElementById("initialTodos");
+  let house = document.getElementById("houseTodos");
+
+  header.innerHTML = "Grocery Todos"
 
   if (grocery.style.display === "block") {
     grocery.style.display = "none";
-    allTodos.style.display = "none";
   } else {
     grocery.style.display = "block";
     allTodos.style.display = "none";
     school.style.display = "none";
+    house.style.display = "none";
   }
 });
 
@@ -258,11 +273,36 @@ school.addEventListener("click", (event) => {
   let school = document.getElementById("schoolTodos");
   let grocery = document.getElementById("groceryTodos");
   let allTodos = document.getElementById("initialTodos");
+  let house = document.getElementById("houseTodos");
+
+  header.innerHTML = "School Todos"
 
   if (school.style.display === "block") {
     school.style.display = "none";
   } else {
     school.style.display = "block";
+    allTodos.style.display = "none";
+    grocery.style.display = "none";
+    house.style.display = "none";
+
+  }
+});
+
+//toggle house todos
+const house = document.querySelector("#houseBtn");
+house.addEventListener("click", (event) => {
+  let house = document.getElementById("houseTodos");
+  let school = document.getElementById("schoolTodos");
+  let grocery = document.getElementById("groceryTodos");
+  let allTodos = document.getElementById("initialTodos");
+
+  header.innerHTML = "House Todos"
+
+  if (house.style.display === "block") {
+    house.style.display = "none";
+  } else {
+    house.style.display = "block";
+    school.style.display = "none";
     allTodos.style.display = "none";
     grocery.style.display = "none";
   }

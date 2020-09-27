@@ -2,30 +2,25 @@
 const completedTodosArray = initalTodos.filter(
     (item) => item.complete === true
   );
+
+
   //toggle completed todos
   const clearDoneTodos = document.querySelector("#clearDoneBtn");
   clearDoneTodos.addEventListener("click", (event) => {
-   
+    const header = document.querySelector(".completedheader")
+    header.innerHTML = "Completed Todos"
   
     //completed todos
     function addCompletedTodo(item) {
       let completedUl = document.querySelector(".completedTodos");
   
       const todo = document.createElement("li");
-      todo.className = "li";
-      const check = document.createElement("input");
-      check.type = "checkbox";
-      check.dataset.id = item.id;
-      check.className = "check";
-      check.id = "check";
-      check.checked = item.complete;
+     
   
       todo.innerHTML = `
       <label>${item.category} - ${item.todo}</label>
-      <button data-id="${item.id}" class="close">X</button>
       `;
   
-      todo.prepend(check);
       completedUl.appendChild(todo);
     }
   
@@ -39,8 +34,7 @@ const completedTodosArray = initalTodos.filter(
       const completedList = document.querySelector(".completedTodos");
       completedList.innerHTML = "";
       completedTodosArray.forEach((item) => addCompletedTodo(item));
-      deleteTodo();
-      completeTodo();
+  
     }
   
     function mainCompleted() {
@@ -57,4 +51,5 @@ const completedTodosArray = initalTodos.filter(
     } else {
       completedTodos.style.display = "block";
     }
+
   });
