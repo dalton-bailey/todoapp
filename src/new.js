@@ -5,11 +5,7 @@ let initalTodos = [
   { id: 1, todo: "Buy milk.", complete: false, category: "Grocery" },
   { id: 2, todo: "Clean the cat box.", complete: false, category: "House" },
   { id: 3, todo: "Chips and salsa.", complete: true, category: "Grocery" },
-  {
-    id: 4,
-    todo: "Finish Homework for DGM 3760",
-    complete: false,
-    category: "School",
+  { id: 4, todo: "Finish Homework for DGM 3760", complete: false, category: "School",
   },
 ];
 
@@ -20,14 +16,14 @@ const houseItems = initalTodos.filter((item) => item.category === "House");
 
 //push new todo to inital array and call displayTodos to display
 function newTodo(todoContent, todoCategory) {
-  const todoText = {
+  const todoData = {
     id: initalTodos.length + 1,
     todo: todoContent,
     complete: false,
     category: todoCategory,
   };
 
-  initalTodos.push(todoText);
+  initalTodos.push(todoData);
   saveToStorage();
 
   initTodos(initalTodos);
@@ -56,10 +52,15 @@ function completeTodo() {
       const index = initalTodos.findIndex((item) => item.id == id);
       initalTodos[index].complete = !initalTodos[index].complete;
       saveToStorage();
+      if (initalTodos[index].complete === true) {
+        console.log(check.parentElement)
+            }
+      else {
+        console.log('false')
+      }
     });
   }
 }
-
 
 function initTodos() {
   if (window.localStorage.getItem("todo")) {
@@ -73,6 +74,15 @@ function initTodos() {
   initalTodos.forEach((item) => addTodo(item));
   deleteTodo();
   completeTodo();
+}
+
+//local storage
+function saveToStorage() {
+  window.localStorage.setItem("todo", JSON.stringify(initalTodos));
+}
+
+function getFromStorage() {
+  initalTodos = JSON.parse(window.localStorage.getItem("todo"));
 }
 
 function addTodo(item) {
@@ -95,21 +105,12 @@ function addTodo(item) {
   initalList.appendChild(todo);
 }
 
-//local storage
-function saveToStorage() {
-  window.localStorage.setItem("todo", JSON.stringify(initalTodos));
-}
-
-function getFromStorage() {
-  initalTodos = JSON.parse(window.localStorage.getItem("todo"));
-}
-
 function main() {
   //display todos
   initTodos();
-  initGroceryList();
-  initSchoolList();
-  initHouseList();
+  // initGroceryList();
+  // initSchoolList();
+  // initHouseList();
 
   //event listener for new todo
   const form = document.querySelector("#form");
@@ -141,91 +142,8 @@ function main() {
 
 main();
 
-//grocery todos
-
-//creates grocery todos
-function addGroceryTodo(item) {
-  let groceriesUl = document.querySelector(".groceryTodos");
-
-  const todo = document.createElement("li");
-  todo.className = "li";
-
-  todo.innerHTML = `
-    <label>${item.category} - ${item.todo}</label>
-    `;
-
-  groceriesUl.appendChild(todo);
-}
-
-//initializes grocery todos
-function initGroceryList() {
-  if (window.localStorage.getItem("todo")) {
-    getFromStorage();
-  } else {
-    saveToStorage();
-  }
-
-  const groceryList = document.querySelector(".groceryTodos");
-  groceryList.innerHTML = "";
-  groceryItems.forEach((item) => addGroceryTodo(item));
-}
-
-//school todos
-
-//create school todos
-function addSchoolTodo(item) {
-  const schoolUl = document.querySelector(".schoolTodos");
-  const todo = document.createElement("li");
-
-  todo.innerHTML = `
-    <label>${item.category} - ${item.todo}</label>
-    `;
-
-  schoolUl.appendChild(todo);
-}
-
-//initializes school todos
-function initSchoolList() {
-  if (window.localStorage.getItem("todo")) {
-    getFromStorage();
-  } else {
-    saveToStorage();
-  }
-
-  const schoolList = document.querySelector(".schoolTodos");
-  schoolList.innerHTML = "";
-  schoolItems.forEach((item) => addSchoolTodo(item));
-}
-
-//house todos
-
-//create house todos
-function addHouseTodo(item) {
-  let houseUl = document.querySelector(".houseTodos");
-
-  const todo = document.createElement("li");
-
-  todo.innerHTML = `
-    <label>${item.category} - ${item.todo}</label>
-    `;
-
-  houseUl.appendChild(todo);
-}
-
-//initializes house todos
-function initHouseList() {
-  if (window.localStorage.getItem("todo")) {
-    getFromStorage();
-  } else {
-    saveToStorage();
-  }
-
-  const houseList = document.querySelector(".houseTodos");
-  houseList.innerHTML = "";
-  houseItems.forEach((item) => addHouseTodo(item));
-}
-
 const header = document.querySelector(".categoryHeader")
+
 
 //toggle all todos
 const allTodos = document.querySelector("#allTodosBtn");
@@ -241,69 +159,154 @@ allTodos.addEventListener("click", (event) => {
     allTodos.style.display = "none";
   } else {
     allTodos.style.display = "block";
-    grocery.style.display = "none";
-    school.style.display = "none";
-    house.style.display = "none";
+    // grocery.style.display = "none";
+    // school.style.display = "none";
+    // house.style.display = "none";
   }
 });
 
-//toggle grocery todos
-const grocery = document.querySelector("#groceryBtn");
-grocery.addEventListener("click", (event) => {
-  let grocery = document.getElementById("groceryTodos");
-  let school = document.getElementById("schoolTodos");
-  let allTodos = document.getElementById("initialTodos");
-  let house = document.getElementById("houseTodos");
+// //grocery todos
 
-  header.innerHTML = "Grocery Todos"
+// //creates grocery todos
+// function addGroceryTodo(item) {
+//   let groceriesUl = document.querySelector(".groceryTodos");
 
-  if (grocery.style.display === "block") {
-    grocery.style.display = "none";
-  } else {
-    grocery.style.display = "block";
-    allTodos.style.display = "none";
-    school.style.display = "none";
-    house.style.display = "none";
-  }
-});
+//   const todo = document.createElement("li");
+//   todo.className = "li";
 
-//toggle school todos
-const school = document.querySelector("#schoolBtn");
-school.addEventListener("click", (event) => {
-  let school = document.getElementById("schoolTodos");
-  let grocery = document.getElementById("groceryTodos");
-  let allTodos = document.getElementById("initialTodos");
-  let house = document.getElementById("houseTodos");
+//   todo.innerHTML = `
+//     <label>${item.category} - ${item.todo}</label>
+//     `;
 
-  header.innerHTML = "School Todos"
+//   groceriesUl.appendChild(todo);
+// }
 
-  if (school.style.display === "block") {
-    school.style.display = "none";
-  } else {
-    school.style.display = "block";
-    allTodos.style.display = "none";
-    grocery.style.display = "none";
-    house.style.display = "none";
+// //initializes grocery todos
+// function initGroceryList() {
+//   if (window.localStorage.getItem("todo")) {
+//     getFromStorage();
+//   } else {
+//     saveToStorage();
+//   }
 
-  }
-});
+//   const groceryList = document.querySelector(".groceryTodos");
+//   groceryList.innerHTML = "";
+//   groceryItems.forEach((item) => addGroceryTodo(item));
+// }
 
-//toggle house todos
-const house = document.querySelector("#houseBtn");
-house.addEventListener("click", (event) => {
-  let house = document.getElementById("houseTodos");
-  let school = document.getElementById("schoolTodos");
-  let grocery = document.getElementById("groceryTodos");
-  let allTodos = document.getElementById("initialTodos");
+// //school todos
 
-  header.innerHTML = "House Todos"
+// //create school todos
+// function addSchoolTodo(item) {
+//   const schoolUl = document.querySelector(".schoolTodos");
+//   const todo = document.createElement("li");
 
-  if (house.style.display === "block") {
-    house.style.display = "none";
-  } else {
-    house.style.display = "block";
-    school.style.display = "none";
-    allTodos.style.display = "none";
-    grocery.style.display = "none";
-  }
-});
+//   todo.innerHTML = `
+//     <label>${item.category} - ${item.todo}</label>
+//     `;
+
+//   schoolUl.appendChild(todo);
+// }
+
+// //initializes school todos
+// function initSchoolList() {
+//   if (window.localStorage.getItem("todo")) {
+//     getFromStorage();
+//   } else {
+//     saveToStorage();
+//   }
+
+//   const schoolList = document.querySelector(".schoolTodos");
+//   schoolList.innerHTML = "";
+//   schoolItems.forEach((item) => addSchoolTodo(item));
+// }
+
+// //house todos
+
+// //create house todos
+// function addHouseTodo(item) {
+//   let houseUl = document.querySelector(".houseTodos");
+
+//   const todo = document.createElement("li");
+
+//   todo.innerHTML = `
+//     <label>${item.category} - ${item.todo}</label>
+//     `;
+
+//   houseUl.appendChild(todo);
+// }
+
+// //initializes house todos
+// function initHouseList() {
+//   if (window.localStorage.getItem("todo")) {
+//     getFromStorage();
+//   } else {
+//     saveToStorage();
+//   }
+
+//   const houseList = document.querySelector(".houseTodos");
+//   houseList.innerHTML = "";
+//   houseItems.forEach((item) => addHouseTodo(item));
+// }
+
+
+// //toggle grocery todos
+// const grocery = document.querySelector("#groceryBtn");
+// grocery.addEventListener("click", (event) => {
+//   let grocery = document.getElementById("groceryTodos");
+//   let school = document.getElementById("schoolTodos");
+//   let allTodos = document.getElementById("initialTodos");
+//   let house = document.getElementById("houseTodos");
+
+//   header.innerHTML = "Grocery Todos"
+
+//   if (grocery.style.display === "block") {
+//     grocery.style.display = "none";
+//   } else {
+//     grocery.style.display = "block";
+//     allTodos.style.display = "none";
+//     school.style.display = "none";
+//     house.style.display = "none";
+//   }
+// });
+
+// //toggle school todos
+// const school = document.querySelector("#schoolBtn");
+// school.addEventListener("click", (event) => {
+//   let school = document.getElementById("schoolTodos");
+//   let grocery = document.getElementById("groceryTodos");
+//   let allTodos = document.getElementById("initialTodos");
+//   let house = document.getElementById("houseTodos");
+
+//   header.innerHTML = "School Todos"
+
+//   if (school.style.display === "block") {
+//     school.style.display = "none";
+//   } else {
+//     school.style.display = "block";
+//     allTodos.style.display = "none";
+//     grocery.style.display = "none";
+//     house.style.display = "none";
+
+//   }
+// });
+
+// //toggle house todos
+// const house = document.querySelector("#houseBtn");
+// house.addEventListener("click", (event) => {
+//   let house = document.getElementById("houseTodos");
+//   let school = document.getElementById("schoolTodos");
+//   let grocery = document.getElementById("groceryTodos");
+//   let allTodos = document.getElementById("initialTodos");
+
+//   header.innerHTML = "House Todos"
+
+//   if (house.style.display === "block") {
+//     house.style.display = "none";
+//   } else {
+//     house.style.display = "block";
+//     school.style.display = "none";
+//     allTodos.style.display = "none";
+//     grocery.style.display = "none";
+//   }
+// });
